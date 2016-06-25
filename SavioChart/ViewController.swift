@@ -41,8 +41,10 @@ class ViewController: UIViewController, LineChartDelegate {
         lineChart.x.grid.visible = false
         lineChart.y.grid.visible = false
         
+        
         // hide dots visiblety in line chart
        // lineChart.dots.visible = false
+        
         
         lineChart.x.labels.visible = true
         lineChart.x.grid.count = CGFloat(data.count)
