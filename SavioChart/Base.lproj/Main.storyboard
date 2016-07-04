@@ -1,25 +1,84 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SavioChart" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XZ1-Ct-2oa">
+                                <rect key="frame" x="-20" y="123" width="790" height="340"/>
+                                <subviews>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3HT-lQ-INg">
+                                        <rect key="frame" x="20" y="20" width="750" height="300"/>
+                                    </containerView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="3HT-lQ-INg" secondAttribute="bottom" constant="20" id="A44-eQ-BN2"/>
+                                    <constraint firstItem="3HT-lQ-INg" firstAttribute="top" secondItem="XZ1-Ct-2oa" secondAttribute="top" constant="20" id="JK3-8O-QVI"/>
+                                    <constraint firstItem="3HT-lQ-INg" firstAttribute="centerY" secondItem="XZ1-Ct-2oa" secondAttribute="centerY" id="Kbl-P3-txI"/>
+                                    <constraint firstItem="3HT-lQ-INg" firstAttribute="centerX" secondItem="XZ1-Ct-2oa" secondAttribute="centerX" id="VCZ-Yu-WJz"/>
+                                    <constraint firstItem="3HT-lQ-INg" firstAttribute="leading" secondItem="XZ1-Ct-2oa" secondAttribute="leading" constant="20" id="k0P-vV-G8L"/>
+                                    <constraint firstAttribute="trailing" secondItem="3HT-lQ-INg" secondAttribute="trailing" constant="20" id="vrg-YA-lFQ"/>
+                                </constraints>
+                            </scrollView>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="6l6-Ct-ANk">
+                                <rect key="frame" x="18" y="451" width="339" height="31"/>
+                                <connections>
+                                    <action selector="SliderAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="g1v-Jq-n2C"/>
+                                </connections>
+                            </slider>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="XZ1-Ct-2oa" secondAttribute="trailing" constant="-395" id="6fb-98-XgN"/>
+                            <constraint firstItem="XZ1-Ct-2oa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="103" id="TRn-rt-PCW"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XZ1-Ct-2oa" secondAttribute="bottom" constant="204" id="cJB-1R-IIQ"/>
+                            <constraint firstItem="XZ1-Ct-2oa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-36" id="f5q-xJ-6u6"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="Slideview" destination="XZ1-Ct-2oa" id="PZN-V3-QMH"/>
+                        <outlet property="containerView" destination="3HT-lQ-INg" id="7u6-cv-3CX"/>
+                        <outlet property="sliderOutlet" destination="6l6-Ct-ANk" id="VRb-WI-pnb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="324.5" y="357.5"/>
+        </scene>
+        <!--Scroll View Controller-->
+        <scene sceneID="ZhI-VE-FnZ">
+            <objects>
+                <viewController storyboardIdentifier="LineChartVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gnp-Lb-uva" customClass="ScrollViewController" customModule="SavioChart" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3jY-FB-u3i"/>
+                        <viewControllerLayoutGuide type="bottom" id="fjc-vO-b5g"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gDG-JJ-ff1">
+                        <rect key="frame" x="0.0" y="0.0" width="750" height="300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="750" height="300"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XV5-JD-7TT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1293" y="321"/>
         </scene>
     </scenes>
 </document>

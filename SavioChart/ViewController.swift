@@ -10,71 +10,102 @@ import UIKit
 
 // source - https://github.com/zemirco/swift-linechart
 
-class ViewController: UIViewController, LineChartDelegate {
-
-    var lineChart: LineChart!
-    var label = UILabel()
+class ViewController: UIViewController {
+    
+    @IBOutlet weak var containerView: UIView!
+    weak var currentViewController: UIViewController?
+    @IBOutlet weak var sliderOutlet: UISlider!
+    var Value:Float = 0
+    @IBOutlet weak var Slideview: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var views: [String: AnyObject] = [:]
-        
-        label.text = "Current Value"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = NSTextAlignment.Center
-        self.view.addSubview(label)
-        views["label"] = label
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[label]-|", options: [], metrics: nil, views: views))
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-80-[label]", options: [], metrics: nil, views: views))
-        
-        //   var data: [CGFloat] = [50, 30, 50, 113, 317, 50, 24,]
-        let data: [CGFloat] = [10, 30, 50, 113, 117, 50, 24]
-        
-        // simple line with custom x axis labels // hear need to pass json value
-        let xLabels: [String] = ["1'st","2nd", "3rd", "4th", "5th", "6th", "7th"]
-        
-        lineChart = LineChart()
-        lineChart.animation.enabled = true
-        lineChart.area = true
-        
-        // hide grid line Visiblity
-        lineChart.x.grid.visible = false
-        lineChart.y.grid.visible = false
         
         
-        // hide dots visiblety in line chart
-       // lineChart.dots.visible = false
+        self.currentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LineChartVC")  // LineChartVC (or) SwiftChartVC
+        self.currentViewController!.view.translatesAutoresizingMaskIntoConstraints = false
+        self.addChildViewController(self.currentViewController!)
+        self.addSubview(self.currentViewController!.view, toView: self.containerView)
         
-        
-        lineChart.x.labels.visible = true
-        lineChart.x.grid.count = CGFloat(data.count)
-        lineChart.y.grid.count = CGFloat(xLabels.count)
-        lineChart.x.labels.values = xLabels
-        lineChart.y.labels.visible = true
-        
-        lineChart.dots.color = UIColor.blackColor()
-        
-        lineChart.addLine(data)
-        //  lineChart.addLine(data2)
-        
-        lineChart.translatesAutoresizingMaskIntoConstraints = false
-        lineChart.delegate = self
-        self.view.addSubview(lineChart)
-        views["chart"] = lineChart
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[chart]-|", options: [], metrics: nil, views: views))
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[label]-[chart(==200)]", options: [], metrics: nil, views: views))
+        let newViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LineChartVC")
+        newViewController!.view.translatesAutoresizingMaskIntoConstraints = false
+        self.cycleFromViewController(self.currentViewController!, toViewController: newViewController!)
+        self.currentViewController = newViewController
+
         
     }
 
-    func didSelectDataPoint(x: CGFloat, yValues: Array<CGFloat>) {
-        label.text = "Value : \(yValues)"
+    override func viewWillAppear(animated: Bool) {
+        //        self.containerView.frame = CGRectMake(-CGFloat(Value),186, 0 ,0 )
+        
+        Slideview.contentOffset = CGPoint(x:CGFloat(Value), y: 20)
+        Slideview.addSubview(containerView)
+        view.addSubview(Slideview)
+        
     }
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        if let chart = lineChart {
-            chart.setNeedsDisplay()
-        }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
+    
+    func cycleFromViewController(oldViewController: UIViewController, toViewController newViewController: UIViewController) {
+        oldViewController.willMoveToParentViewController(nil)
+        self.addChildViewController(newViewController)
+        self.addSubview(newViewController.view, toView:self.containerView!)
+        newViewController.view.alpha = 0
+        newViewController.view.layoutIfNeeded()
+        UIView.animateWithDuration(0.5, animations: {
+            newViewController.view.alpha = 1
+            oldViewController.view.alpha = 0
+            },
+                                   completion: { finished in
+                                    oldViewController.view.removeFromSuperview()
+                                    oldViewController.removeFromParentViewController()
+                                    newViewController.didMoveToParentViewController(self)
+        })
+    }
+    
+    func addSubview(subView:UIView, toView parentView:UIView) {
+        parentView.addSubview(subView)
+        
+        var viewBindingsDict = [String: AnyObject]()
+        viewBindingsDict["subView"] = subView
+        parentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[subView]|",
+            options: [], metrics: nil, views: viewBindingsDict))
+        parentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[subView]|",
+            options: [], metrics: nil, views: viewBindingsDict))
+    }
+    
+    
+    
+    
+    @IBAction func SliderAction(sender: AnyObject) {
+        
+        self.Value = sliderOutlet.value
+        print(Value)
+        
+        viewWillAppear(true)
+        
+        /*
+         let rect = CGRectMake( CGFloat(value),10.s0, 600 ,100 )
+         var DynamicView=UIView(frame: rect)
+         DynamicView.backgroundColor=UIColor.greenColor()
+         DynamicView.layer.cornerRadius=25
+         DynamicView.layer.borderWidth=2
+         self.view.addSubview(DynamicView)
+         */
+        
+        /*   var bgImage: UIImageView?
+         var image: UIImage = UIImage(named: "city.jpg")!
+         bgImage = UIImageView(image: image)
+         bgImage!.frame = CGRectMake(-CGFloat(value),0,1300,200)
+         self.view.addSubview(bgImage!)
+         */
+        
+    }
+
+  
 
 }
 

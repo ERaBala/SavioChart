@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CEB779F71D2281A900FE0AEA /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB779F61D2281A900FE0AEA /* ScrollViewController.swift */; };
 		CEFAD0A11D1E71D700E1D4C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAD0A01D1E71D700E1D4C6 /* AppDelegate.swift */; };
 		CEFAD0A31D1E71D700E1D4C6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAD0A21D1E71D700E1D4C6 /* ViewController.swift */; };
 		CEFAD0A61D1E71D700E1D4C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEFAD0A41D1E71D700E1D4C6 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CEB779F61D2281A900FE0AEA /* ScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
 		CEFAD09D1D1E71D700E1D4C6 /* SavioChart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SavioChart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEFAD0A01D1E71D700E1D4C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEFAD0A21D1E71D700E1D4C6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				CEFAD0A71D1E71D700E1D4C6 /* Assets.xcassets */,
 				CEFAD0A91D1E71D700E1D4C6 /* LaunchScreen.storyboard */,
 				CEFAD0AC1D1E71D700E1D4C6 /* Info.plist */,
+				CEB779F61D2281A900FE0AEA /* ScrollViewController.swift */,
 			);
 			path = SavioChart;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 				CEFAD0A31D1E71D700E1D4C6 /* ViewController.swift in Sources */,
 				CEFAD0A11D1E71D700E1D4C6 /* AppDelegate.swift in Sources */,
 				CEFAD0B31D1E724F00E1D4C6 /* LineChart.swift in Sources */,
+				CEB779F71D2281A900FE0AEA /* ScrollViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +294,7 @@
 				CEFAD0B11D1E71D700E1D4C6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
